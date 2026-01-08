@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overseas Language & Communication Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .lang-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: #e0e0e0;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .services-section, .pricing-section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            font-weight: 700;
+            border-left: 5px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .service-item, .price-item {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover, .price-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-item h3, .price-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .service-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-item li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .service-item li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .suitable-for {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .price-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #764ba2;
+            margin: 10px 0;
+        }
+
+        .price-item .description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        iframe {
+            width: 100%;
+            min-height: 1200px;
+            border: none;
+            border-radius: 12px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .header-content {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 10px;
+            }
+
+            .hero, .services-section, .pricing-section, .form-section {
+                padding: 30px 20px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">Hi-Topper</div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="ja">日本語</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chinese Content -->
+        <div class="lang-content active" data-content="zh">
+            <div class="hero">
+                <h1>境外语言与沟通落地支持服务</h1>
+                <p class="subtitle">我们为跨境卖家提供面向日本与英语市场的语言与沟通落地支持；<br />
+目标只有一个：<br />
+让你的商品“说对话”，<br />
+让你的客户“真理解、少误解、不吵架”。<br />
+本服务旨在降低跨境沟通成本与表达风险，专注于语言、表达与客户沟通层面的境外落地支持；<br />
+不涉及选品、投流或代运营、广告投放或销售结果承诺。<br />
+</p>
+                <a href="mailto:jinbo@hitopper.top" class="contact-info">✉️ jinbo@hitopper.top</a>
+            </div>
+
+            <div class="content-grid">
+                <div class="services-section">
+                    <h2 class="section-title">服务内容</h2>
+
+                    <div class="service-item">
+                        <h3>服务一｜商品语言本地化（日本语 / 英语）</h3>
+                        <ul>
+                            <li>商品标题翻译为本地化销售语言</li>
+                            <li>商品卖点整理（本地销售化梳理）</li>
+                            <li>商品详情页文案优化（本地化销售语言）</li>
+                            <li>尺寸、材质、使用说明的本地化销售表达</li>
+                            <li>消除容易引发误解或风险的翻译表达</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>适合场景：</strong>从未/首次进入日本市场，以及英语市场（如北美、英国及其他英语使用地区）、降低语言风险、提升表达清晰度的商品。
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>服务二｜客户咨询与售后沟通支持</h3>
+                        <ul>
+                            <li>日语 / 英语售前咨询回复</li>
+                            <li>境外买家常见问题（FAQ）整理与模板化</li>
+                            <li>售后说明、退换货沟通文案</li>
+                            <li>投诉与情绪性反馈的缓冲式回复支持</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>适合场景：</strong>时差不同、语言不顺、回复压力大、担心因沟通不当影响店铺评分和商品销量
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>服务三｜店铺与平台内容支持</h3>
+                        <ul>
+                            <li>店铺介绍与品牌说明文案翻译为符合当地商业语境的自然表达</li>
+                            <li>交易条款、注意事项的语言层面风险提醒与表达修正</li>
+                            <li>运输、关税、售后说明整理</li>
+                            <li>减少文化误解的风险</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>适合场景：</strong>平台不够专业，客户不够信任，风险控制不够全面
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>服务四｜上架前测试与表达优化</h3>
+                        <ul>
+                            <li>翻译可读性与买家理解度优化</li>
+                            <li>日语 / 英语买家视角复核</li>
+                            <li>卖点顺序与表达方式翻译为本地化销售语言</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>适合场景：</strong>产品上线前，需要了解本地销售语境，从语言上先"避坑"
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>服务五｜沟通与对接协助</h3>
+                        <ul>
+                            <li>卖家与海外客户之间的沟通中转</li>
+                            <li>多轮复杂问题的语言整理</li>
+                            <li>合作邮件、报价说明的语言润色</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>适合场景：</strong>需要更专业、更稳妥的对外沟通形象
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section">
+                    <h2 class="section-title">服务价格</h2>
+
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 24px;">按项目服务</h3>
+
+                    <div class="price-item">
+                        <h3>单品语言本地化包</h3>
+                        <div class="price-amount">CNY ¥300〜1000 / 商品（视内容复杂度）</div>
+                        <div class="description"> • 商品标题 + 卖点 + 详情页</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>客户沟通支持（月度服务包）</h3>
+                        <div class="price-amount">CNY ¥500〜1000 / 月（视内容复杂度）</div>
+                        <div class="description"> • 咨询 / 售后文案整理</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>上架前语言检查</h3>
+                        <div class="price-amount">CNY：¥500 / 商品（2000字以内，超出部分¥100/千字）</div>
+                        <div class="description"> • 使用本地化销售语言校对和修正 + 修改建议<br />
+ • 商品图片文字校对和修正 + 修改建议
+</div>
+                    </div>
+
+                    <h3 style="color: #667eea; margin: 30px 0 20px 0; font-size: 24px;">按月服务</h3>
+
+                    <div class="price-item">
+                        <h3>🟦 基础支持包</h3>
+                        <div class="price-amount">CNY ¥3000 / 月（含20个商品及相应支持）</div>
+                        <div class="description">
+                            • 商品本地化销售语言翻译 / 升级<br>
+                            • 客户咨询支持<br>                            
+                        </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>🟩 标准支持包（推荐）</h3>
+                        <div class="price-amount">CNY ¥6000 / 月（含30个商品及相应支持）</div>
+                        <div class="description">
+                            • 商品本地化销售语言翻译 / 升级<br>
+                            • 客户咨询 & 售后回复<br>
+                            • 表达风险规避<br>
+                        </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>🟨 深度支持包</h3>
+                        <div class="price-amount">CNY ¥9000 / 月（含40个商品及相应支持）</div>
+                        <div class="description">
+                            • 商品本地化销售语言翻译 / 升级<br>
+                            • 上架前检查<br>
+                            • 全部语言与沟通支持<br>
+                            • 多轮客户沟通中转<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">联系我们</h2>
+                <p style="color: #666; margin-bottom: 20px;">请填写以下表单，我们将尽快与您联系。<br />或发送邮件至：<br />
+jinbo@hitopper.top<br />
+siolyjow@gmail.com</p>
+                <div class="form-container">
+                    <iframe id="goldendata_form_cohQr5" src="https://pih1avbw.jsjform.com/f/cohQr5?background=white&banner=show&inner_redirect=false&embedded=true"  width="100%" frameborder=0 allowTransparency="true" height="1259"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- English Content -->
+        <div class="lang-content" data-content="en">
+            <div class="hero">
+                <h1>Overseas Language & Communication Support</h1>
+                <p class="subtitle">We provide language and communication support for Cross-border sellers<br />
+entering Japanese and Chinese-speaking markets.<br />
+Our goal is simple:<br />
+Help your product communicate clearly.<br />
+Help your customers understand correctly, reduce misunderstandings, and communicate smoothly.<br />
+This service focuses on language, wording, and customer communication support only.<br />
+It does not include product selection, advertising, store operation, traffic acquisition,<br />
+or any sales result guarantees.<br />
+</p>
+                <a href="mailto:jinbo@hitopper.top" class="contact-info">✉️ jinbo@hitopper.top</a>
+            </div>
+
+            <div class="content-grid">
+                <div class="services-section">
+                    <h2 class="section-title">Our Services</h2>
+
+                    <div class="service-item">
+                        <h3>Service 1｜Product Localization (Japanese / Chinese)</h3>
+                        <ul>
+                            <li>Localization of product titles into sales-oriented language</li>
+                            <li>Structuring of key selling points for local markets</li>
+                            <li>Optimization of product detail page copy</li>
+                            <li>Localization of size, material, and usage descriptions</li>
+                            <li>Removal of wording that may cause misunderstanding or communication risk</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>Suitable for:</strong> Products entering the Japanese market for the first time,or Chinese-speaking markets (such as China/Taiwan/Hong Kong/Macau/Singapore, and other Chinese-using regions),with the goal of reducing language risk and improving clarity of expression.
+
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Service 2｜Customer Inquiry & After-Sales Communication Support</h3>
+                        <ul>
+                            <li>Pre-sales inquiry language support (Chinese / Japanese)</li>
+                            <li>FAQ preparation and response templates for overseas buyers</li>
+                            <li>After-sales, return, and refund communication wording</li>
+                            <li>Calm and neutral wording support for complaints or emotional feedback</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>Suitable for:</strong> Sellers facing time zone differences, language barriers, heavy response workload,or concerns about store ratings and product reputation due to communication issues.
+
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Service 3｜Online Store & Platform Content Support</h3>
+                        <ul>
+                            <li>Store introduction and brand description in natural, locally appropriate business language</li>
+                            <li>Language-level risk reminders and wording adjustments for terms and notices</li>
+                            <li>Shipping, customs, and after-sales explanation support</li>
+                            <li>Reduction of potential cultural misunderstanding risks</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>Suitable for:</strong>Stores that appear unprofessional to overseas buyers, lack trust signals, or require more structured risk control in communication.
+
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Service 4｜Pre-Listing Review & Expression Optimization</h3>
+                        <ul>
+                            <li>Readability and buyer comprehension optimization</li>
+                            <li>Review from Japanese / Chinese buyer perspectives</li>
+                            <li>Adjustment of selling point order and expression for local markets</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>Suitable for:</strong> Products preparing for launch and aiming to identify language-related risks in advance.
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Service 5｜Communication & Coordination Support</h3>
+                        <ul>
+                            <li>Communication relay between sellers and overseas customers</li>
+                            <li>Language organization for multi-round or complex issues</li>
+                            <li>Polishing of cooperation emails and quotation explanations</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>Suitable for:</strong> Sellers seeking a more professional and stable external communication image.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section">
+                    <h2 class="section-title">Pricing</h2>
+
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 24px;">Project-Based Services</h3>
+
+                    <div class="price-item">
+                        <h3>Single Product Localization Plan</h3>
+                        <div class="price-amount">USD $30–100 / product (depending on content complexity)</div>
+                        <div class="description">Product title + selling points + detail page</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>Customer Communication Support (Monthly Plan)</h3>
+                        <div class="price-amount">USD $50–150 / month (depending on workload)</div>
+                        <div class="description">Inquiry and after-sales wording support</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>Pre-Listing Language Review</h3>
+                        <div class="price-amount">USD $100 / product (up to 2,000 Chinese characters;
+additional content: $10 / 1,000 characters)
+</div>
+                        <div class="description">• Localization wording review & suggestions<br />
+• Image text review & correction<br /></div>
+                    </div>
+
+                    <h3 style="color: #667eea; margin: 30px 0 20px 0; font-size: 24px;">Monthly Service Plans</h3>
+
+                    <div class="price-item">
+                        <h3>Basic Support Plan</h3>
+                        <div class="price-amount">USD $400 / month
+(Includes up to 20 products and related support)
+</div>
+                        <div class="description">
+                            • Product localization and wording upgrade<br>
+                            • Customer inquiry language support<br>
+                                                    </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>Standard Support Plan (Recommended)</h3>
+                        <div class="price-amount">USD $800 / month (Includes up to 30 products and related support)
+</div>
+                        <div class="description">
+                            • Product localization and wording upgrade<br>
+                            • Customer inquiry & after-sales language support<br>
+                            • Expression risk reminders<br>
+                                                    </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>Advanced Support Plan</h3>
+                        <div class="price-amount">USD $1200 / month (Includes up to 40 products and related support)
+</div>
+                        <div class="description">
+                            • Product localization and wording upgrade<br>
+                            • Pre-listing review<br>
+                            • Full language & communication support<br>
+                            • Multi-round customer communication relay<br>
+                                                   </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Contact Us</h2>
+                <p style="color: #666; margin-bottom: 20px;">Please fill out the form below and we will get back to you soon</p>
+                <div class="form-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_sRhG9zgkQeLpqUiIoxnSrHyIi7o4S18TqPATL6g8C9QzIg/viewform?embedded=true"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Japanese Content -->
+        <div class="lang-content" data-content="ja">
+            <div class="hero">
+                <h1>海外向け言語・コミュニケーション支援サービス</h1>
+                <p class="subtitle">当サービスは、越境EC事業者向けに、<br>
+中国語圏市場および英語圏市場における<br>
+言語・表現・顧客対応に関するサポートを提供しています。<br>
+目的は明確です。<br>
+商品情報が正しく伝わること。<br>
+誤解を減らし、円滑なコミュニケーションを実現すること。<br>
+本サービスは、言語・表現・顧客コミュニケーション支援に限定されます。<br>
+商品選定、広告運用、店舗運営、集客施策、<br>
+販売成果に関する保証は一切行いません。<br>
+</p>
+                <a href="mailto:jinbo@hitopper.top" class="contact-info">✉ jinbo@hitopper.top</a>
+            </div>
+
+            <div class="content-grid">
+                <div class="services-section">
+                    <h2 class="section-title">サービス内容</h2>
+
+                    <div class="service-item">
+                        <h3>サービス1｜商品言語ローカライズ（中国語 / 英語）</h3>
+                        <ul>
+                            <li>商品タイトルの販売向けローカライズ</li>
+                            <li>売りポイントの整理（現地市場向け表現）</li>
+                            <li>商品詳細ページ文案の最適化</li>
+                            <li>サイズ・素材・使用方法のローカライズ表現</li>
+                            <li>誤解やリスクを招きやすい表現の調整</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>対象となるケース：</strong>中国語圏市場または英語圏市場への初参入商品、言語リスクを抑えたい商品
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>サービス2｜顧客問い合わせ・アフター対応支援</h3>
+                        <ul>
+                            <li>中国語 / 英語による事前問い合わせ対応文案</li>
+                            <li>海外購入者向けFAQの整理・テンプレート化</li>
+                            <li>返品・返金対応文案の整理</li>
+                            <li>クレームや感情的な問い合わせに対する落ち着いた表現のサポート</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>対象となるケース：</strong>時差や言語の問題により対応負荷が高い場合、対応ミスによる評価低下を防ぎたい場合
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>サービス3｜ストア・プラットフォーム文案支援</h3>
+                        <ul>
+                            <li>店舗紹介・ブランド説明の自然な商用表現への調整</li>
+                            <li>規約・注意事項における表現上のリスク指摘と修正</li>
+                            <li>配送・関税・アフターサービス説明の整理</li>
+                            <li>文化的誤解を招く可能性の低減</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>対象となるケース：</strong>店舗の信頼性が伝わりにくい、または表現面でのリスク管理を強化したい場合
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>サービス4｜出品前チェック・表現最適化</h3>
+                        <ul>
+                            <li>可読性・理解度の確認</li>
+                            <li>中国語 / 英語購入者視点での表現確認</li>
+                            <li>売りポイント順序および表現の最適化</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>対象となるケース：</strong>商品公開前に、言語面でのリスクを事前に把握したい場合
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>サービス5｜コミュニケーション・対外対応支援</h3>
+                        <ul>
+                            <li>海外顧客とのやり取りの言語整理</li>
+                            <li>複数回にわたる複雑な内容の整理</li>
+                            <li>取引メール・見積説明文の表現調整</li>
+                        </ul>
+                        <div class="suitable-for">
+                            <strong>対象となるケース：</strong>より安定した、専門性のある対外対応を行いたい場合
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section">
+                    <h2 class="section-title">料金</h2>
+
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 24px;">プロジェクト別料金</h3>
+
+                    <div class="price-item">
+                        <h3>単品ローカライズパッケージ</h3>
+                        <div class="price-amount">JPY ¥6,000 - ¥20,000 / 商品</div>
+                        <div class="description">商品タイトル＋売りポイント＋詳細文案（内容により異なります）</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>顧客対応支援（月額）</h3>
+                        <div class="price-amount">JPY ¥10,000 - ¥20,000 / 月</div>
+                        <div class="description">問い合わせ・アフター対応文案整理（作業量により異なります）</div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>出品前言語チェック</h3>
+                        <div class="price-amount">JPY ¥10,000 / 商品</div>
+                        <div class="description">商品文案・画像内テキストの確認および修正提案（2,000字以内、超過分 ¥100/1,000字）</div>
+                    </div>
+
+                    <h3 style="color: #667eea; margin: 30px 0 20px 0; font-size: 24px;">月額サービスプラン</h3>
+
+                    <div class="price-item">
+                        <h3>ベーシックプラン</h3>
+                        <div class="price-amount">JPY ¥60,000 / 月</div>
+                        <div class="description">
+                            • 商品言語ローカライズ(最大20商品)<br>
+                            • 基本的な表現修正および文案整理<br>
+                            • 定型的な問い合わせ対応文案のサポート<br>
+                            ※ 複数回の大幅修正、複雑な個別対応は含まれません
+                        </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>スタンダードプラン（推奨）</h3>
+                        <div class="price-amount">JPY ¥120,000 / 月</div>
+                        <div class="description">
+                            • 商品言語ローカライズ(最大30商品)<br>
+                            • 問い合わせ・アフター対応文案サポート<br>
+                            • 表現上の誤解・リスクポイントの指摘<br>
+                            • 軽微な修正対応を含む<br>
+                            ※ 個別案件や多言語・多プラットフォーム対応は別途相談
+                        </div>
+                    </div>
+
+                    <div class="price-item">
+                        <h3>アドバンスドプラン</h3>
+                        <div class="price-amount">JPY ¥180,000 / 月</div>
+                        <div class="description">
+                            • 商品言語ローカライズ(最大40商品)<br>
+                            • 出品前言語チェック<br>
+                            • 複数回にわたる顧客対応文案整理<br>
+                            • 複雑な問い合わせ内容の言語整理<br>
+                            ※ 作業量・内容により、対応範囲を事前に協議します
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">お問い合わせ</h2>
+                <p style="color: #666; margin-bottom: 20px;">以下のフォームにご記入ください。できるだけ早くご連絡いたします</p>
+                <div class="form-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe_sRhG9zgkQeLpqUiIoxnSrHyIi7o4S18TqPATL6g8C9QzIg/viewform?embedded=true"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 HiTopper. Professional Language & Communication Support Services.</p>
+        </footer>
+    </div>
+
+    <script>
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const langContents = document.querySelectorAll('.lang-content');
+
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetLang = button.dataset.lang;
+                
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                langContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.dataset.content === targetLang) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+                
