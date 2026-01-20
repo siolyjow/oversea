@@ -73,14 +73,15 @@
             gap: 20px;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 200px; /* 根据你的logo实际大小调整 */
+    width: auto;
+}
 
         .lang-switcher {
             display: flex;
@@ -306,7 +307,9 @@
     <div class="container">
         <header>
             <div class="header-content">
-                <div class="logo">Hi-Topper</div>
+                <div class="logo">
+    <img src="logo.png" alt="Hi-Topper">
+</div>
                 <div class="lang-switcher">
                     <button class="lang-btn active" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="en">English</button>
